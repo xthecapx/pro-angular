@@ -1,3 +1,9 @@
+# Notes
+
+1. The class keyword is used to define types that can be instantiated with the new keyword to create objects that have well-defined data and behavior.
+2. To display the data values in the model to the user. In Angular, this is done using a template, which is a fragment of HTML that contains instructions that are performed by Angular.
+3. An Angular component is responsible for managing a template and providing it with the data and logic it needs.
+
 # Todo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
