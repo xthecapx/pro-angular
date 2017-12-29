@@ -10,7 +10,7 @@ import { StaticDataSource } from "./static.datasource";
   providers: [
     ProductRepository,
     StaticDataSource
-  ]
+  ],
   declarations: []
 })
 export class ModelModule { }
