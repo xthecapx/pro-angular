@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { StoreComponent } from './store/store/store.component';
+import { StoreComponent } from './store/store.component';
 
 
 @NgModule({
