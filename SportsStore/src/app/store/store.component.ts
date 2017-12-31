@@ -44,8 +44,7 @@ export class StoreComponent implements OnInit {
   }
 
   get pageCount(): number {
-    return Math.ceil(this.repository
-      .getProducts(this.selectedCategory).length / this.productsPerPage)
+    return Math.ceil(this.repository.getProducts(this.selectedCategory).length / this.productsPerPage)
   }
 
   ngOnInit() {
