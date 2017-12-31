@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+
 import { Product } from "../model/product.model";
 import { ProductRepository } from "../model/product.repository";
 import { Cart } from "../model/cart.model";
@@ -14,7 +16,8 @@ export class StoreComponent implements OnInit {
   public selectedPage = 1;
 
   constructor(private repository: ProductRepository,
-              private cart: Cart) { }
+              private cart: Cart,
+              private router: Router) { }
 
   get products(): Product[] {
     let pageIndex = (this.selectedPage - 1) * this.productsPerPage;
@@ -51,6 +54,7 @@ export class StoreComponent implements OnInit {
 
   addProductToCart(product: Product) {
     this.cart.addLine(product);
+    this.router.navigateByUrl("/cart");
   }
 
   ngOnInit() {
