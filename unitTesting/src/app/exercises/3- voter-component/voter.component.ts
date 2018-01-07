@@ -44,24 +44,33 @@ export class VoterComponent {
 
   @Output() myVoteChanged = new EventEmitter();
 
-  upVote(){
-    if (this.myVote == 1)
+  // 1. Should increment totalVotes
+  // 2. if myVote = 1, and call upVote() totalVotes won't increment
+  // 3. If no votes and call upVote() should emit { myVote: 1 }
+  // 4. If you have votes and call upVote() it shouldn't emit.
+  upVote() {
+    if (this.myVote == 1) {
       return;
+    }
 
     this.myVote++;
-
     this.myVoteChanged.emit({ myVote: this.myVote });
   }
 
-  downVote(){
-    if (this.myVote == -1)
+  // 1. Should decrement totalVotes
+  // 2. If myVote = -1. won't decrement votes
+  // 3. When decrement votes it should emit { myVote: -1 }
+  // 4. If myVote = -1. won't emit.
+  downVote() {
+    if (this.myVote == -1) {
       return;
+    }
 
     this.myVote--;
-
     this.myVoteChanged.emit({ myVote: this.myVote });
   }
 
+  // 1. If othersVote = 10 and myVote = 1, returns 11
   get totalVotes(): number {
     return this.othersVote + this.myVote;
   }

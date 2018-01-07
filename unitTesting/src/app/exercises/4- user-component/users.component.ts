@@ -7,10 +7,19 @@ export class UsersComponent implements OnInit {
 
   constructor(private _service: UserService) {	}
 
+  // 1. User services should be called and users should be setted
   ngOnInit() {
-    this._service.getUsers().subscribe(users => this.users = users);
+    this._service.getUsers().subscribe(users => {
+      this.users = users
+    });
   }
 
+  // 1. If user cofirm it should delete it
+  // 2. If user won't confirm it won't delete
+  // 3. If user cofirm it should delete it and call _service.deleteUser
+  // 4. Should not call the server if user cancels
+  // 5. If user cofirm and there is an error on the server it undo the changes
+  // 6. If user confirm and there is an error it should display an alert
   deleteUser(user) {
     if (confirm("Are you sure you want to delete " + user.name + "?")) {
       var index = this.users.indexOf(user)

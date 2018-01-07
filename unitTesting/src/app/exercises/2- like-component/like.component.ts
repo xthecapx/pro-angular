@@ -25,7 +25,10 @@ export class LikeComponent {
   @Input() totalLikes = 0;
   @Input() iLike = false;
 
-  click(){
+  // 1. When user click like should be equal to !like
+  // 2. If like was true, totalLikes++
+  // 3. If like was false, totalLikes--
+  click() {
     this.iLike = !this.iLike;
     this.totalLikes += this.iLike ? 1 : -1;
   }
