@@ -64,7 +64,8 @@ describe('TodosComponent', () => {
 
     // ASSERT
     // expect(component.todos.indexOf(todo)).toBeGreaterThan(-1);
-    expect(component.todos).toBe(todo);
+    // expect(component.todos).toBe(todo);
+    expect(component.todos === todo).toBeTruthy;
   });
 
   it('Should set the message property if server returns an error', () => {
