@@ -27,6 +27,9 @@ export class TodosComponent {
       error => this.message = error);
   }
 
+  // What should be tested:
+  // 1. Call the confirmation box if yes call the server and delete it.
+  // 2. Call the confirmation box if no doesn't call the server.
   delete(id) {
     if (confirm('Are you sure?'))
       this.service.delete(id).subscribe();
