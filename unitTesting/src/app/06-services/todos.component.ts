@@ -16,6 +16,10 @@ export class TodosComponent {
     this.service.getTodos().subscribe(t => this.todos = t);
   }
 
+  // What should be tested:
+  // 1. Make sure that service add is call.
+  // 2. if call is successfully the respond is added to this.todos
+  // 3. if call has an error the respond should be added to this.message
   add() {
     var newTodo = { title: '... ' };
     this.service.add(newTodo).subscribe(
