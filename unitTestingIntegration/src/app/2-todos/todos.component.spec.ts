@@ -1,18 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { TodosComponent } from './todos.component';
+import { TodoService } from "./todo.service";
 
-// Be sure to remove "x" from "xdescribe" below when you start working here.
-
-xdescribe('TodosComponent', () => {
+describe('TodosComponent', () => {
   let component: TodosComponent;
   let fixture: ComponentFixture<TodosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodosComponent ]
+      imports: [ HttpModule ],
+      declarations: [ TodosComponent ],
+      providers: [ TodoService ]
     })
     .compileComponents();
   }));
