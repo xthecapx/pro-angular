@@ -13,7 +13,7 @@ import { VoterComponent } from './1-voter/voter.component';
 import { routes } from './app.routes';
 import { UsersComponent } from './users/users.component';
 import { HighlightDirective } from './highlight.directive';
-import { GreeterComponent } from './greeter/greeter.component';
+import { TodoService } from "./2-todos/todo.service";
 
 @NgModule({
   declarations: [
@@ -23,8 +23,7 @@ import { GreeterComponent } from './greeter/greeter.component';
     UserDetailsComponent,
     VoterComponent,
     UsersComponent,
-    HighlightDirective,
-    GreeterComponent
+    HighlightDirective
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -32,7 +31,7 @@ import { GreeterComponent } from './greeter/greeter.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ TodoService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
