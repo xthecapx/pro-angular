@@ -16,6 +16,10 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
+  // 1. Check if navigate is call with the right arguments
+  // 2. Ensure that you have a property route
+  // Use a real router object: Feels like you are testing the router core
+  // 1. Not recommended
   save() {
     this.router.navigate(['users']);
   }
