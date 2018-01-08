@@ -14,6 +14,7 @@ import { routes } from './app.routes';
 import { UsersComponent } from './users/users.component';
 import { HighlightDirective } from './highlight.directive';
 import { TodoService } from "./2-todos/todo.service";
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TodoService } from "./2-todos/todo.service";
     UserDetailsComponent,
     VoterComponent,
     UsersComponent,
-    HighlightDirective
+    HighlightDirective,
+    NavComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
