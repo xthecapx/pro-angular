@@ -9,7 +9,7 @@ export class VoterComponent {
   @Input() othersVote = 0;
   @Input() myVote = 0;
 
-  @Output() vote = new EventEmitter();
+  @Output() myVoteChanged = new EventEmitter();
 
   upVote() {
     if (this.myVote == 1 ) {
@@ -18,7 +18,7 @@ export class VoterComponent {
 
     this.myVote++;
 
-    this.vote.emit({ myVote: this.myVote });
+    this.myVoteChanged.emit({ myVote: this.myVote });
   }
 
   downVote() {
@@ -28,7 +28,7 @@ export class VoterComponent {
 
     this.myVote--;
 
-    this.vote.emit({ myVote: this.myVote });
+    this.myVoteChanged.emit({ myVote: this.myVote });
   }
 
   get totalVotes() {
