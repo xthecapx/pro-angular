@@ -1,8 +1,11 @@
-import { groupBy } from "lodash/collection";
-import people from "./module-one";
+import { increment, decrement } from "./store/actions";
+import { Store } from "./store/store";
+import { Calculator } from "./calculator/calculator";
+import { Main } from "./main/main";
 
-const managerGroups = groupBy(people, "manager");
+const store = new Store();
+const main = new Main(store);
+main.changeStateListener();
 
-const root = document.querySelector("#root");
-root.innerHTML = `<pre>${JSON.stringify(managerGroups, null, 2)}</pre>`;
-console.log("cristian");
+const calculator = new Calculator();
+calculator.dispatchActions();
