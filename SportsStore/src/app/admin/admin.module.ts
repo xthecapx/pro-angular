@@ -7,9 +7,9 @@ import { AuthComponent } from "./auth.component";
 import { AdminComponent } from "./admin.component";
 
 import { AuthGuard } from "./auth.guard";
-/* import { ProductTableComponent } from "./productTable.component";
+import { ProductTableComponent } from "./productTable.component";
 import { ProductEditorComponent } from "./productEditor.component";
-import { OrderTableComponent } from "./orderTable.component"; */
+import { OrderTableComponent } from "./orderTable.component";
 
 let routing = RouterModule.forChild([
   {
@@ -20,13 +20,13 @@ let routing = RouterModule.forChild([
     path: "main",
     component: AdminComponent,
     canActivate: [ AuthGuard ],
-    /* children: [
+    children: [
       { path: "products/:mode/:id", component: ProductEditorComponent },
       { path: "products/:mode", component: ProductEditorComponent },
       { path: "products", component: ProductTableComponent },
       { path: "orders", component: OrderTableComponent },
       { path: "**", redirectTo: "products" }
-    ] */
+    ]
   },
   {
     path: "**",
@@ -44,9 +44,9 @@ let routing = RouterModule.forChild([
   declarations: [
     AuthComponent,
     AdminComponent,
-    // ProductTableComponent,
-    // ProductEditorComponent,
-    // OrderTableComponent
+    ProductTableComponent,
+    ProductEditorComponent,
+    OrderTableComponent
   ]
 })
 export class AdminModule { }
