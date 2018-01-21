@@ -10,7 +10,7 @@
       <td>{{p.id}}</td>
       <td>{{p.name}}</td>
       <td>{{p.category}}</td>
-      <td>{{p.price | currency:"USD":true:"2.2-2"}}</td>
+      <td>{{p.price | currency:"USD":"symbol":"2.2-2"}}</td>
       <td>
         <button class="btn btn-sm btn-warning"
                 [routerLink]="['/admin/main/products/edit', p.id]">

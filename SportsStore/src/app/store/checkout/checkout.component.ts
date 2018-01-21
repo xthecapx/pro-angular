@@ -9,11 +9,10 @@ import { OrderRepository } from "../../model/order.repository";
   styleUrls: ["checkout.component.css"]
 })
 export class CheckoutComponent {
-  orderSent: boolean = false;
-  submitted: boolean = false;
+  orderSent = false;
+  submitted = false;
 
-  constructor(public repository: OrderRepository,
-              public order: Order) {}
+  constructor(public repository: OrderRepository, public order: Order) {}
 
   submitOrder(form: NgForm) {
     this.submitted = true;
