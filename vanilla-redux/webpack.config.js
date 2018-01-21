@@ -4,11 +4,14 @@ const path = require('path')
 var config = {
   context: path.resolve(__dirname, 'src'), // `__dirname` is root of project and `src` is source
   entry: {
-    app: './app.js',
+    app: './app.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'), // `dist` is the destination
     filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'src'), // `__dirname` is root of the project
@@ -27,10 +30,22 @@ var config = {
             ]
           }
         }]
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'src'),
+        use: [{
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            }
+        }]
       }
     ]
   },
-  devtool: "eval-source-map" // Default development sourcemap
+  // devtool: "source-map" // Default development sourcemap
+  devtool: 'eval-source-map',
 };
 
 // Check if build is running in production mode, then change the sourcemap type
