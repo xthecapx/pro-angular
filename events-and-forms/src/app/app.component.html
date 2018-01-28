@@ -1,0 +1,16 @@
+<table class="table table-sm table-bordered m-a-2">
+  <tr>
+    <th>index</th>
+    <th>name</th>
+    <th>cateory</th>
+    <th>price</th>
+  </tr>
+  <tr *ngFor="let item of getProducts(); let i = index; let odd = odd; let first = first; let last = last; trackBy:getKey"
+      [class.bg-primary]="odd"
+      [class.bg-info]="!odd">
+    <td>{{ i + 1 }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.category }}</td>
+    <td>{{ item.price }}</td>
+  </tr>
+</table>
