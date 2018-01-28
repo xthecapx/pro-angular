@@ -1,3 +1,79 @@
 <div [ngClass]="'p-a-1 ' + getClasses()">
     There are {{model.getProducts().length}} products in the model
 </div>
+
+<div class="form-group m-t-1" >
+  <label>Name</label>
+  <input class="form-cotrol" [value]="model.getProduct(1)?.name || 'Home'" />
+</div>
+
+<div [ngClass]="'p-a-1 ' + getClasses()"
+     [textContent]="'Name: ' + (model.getProduct(1)?.name || 'None')">
+</div>
+
+<table class="table table-sm table-bordered table-striped m-t-1">
+  <tr>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td [attr.colspan]="model.getProducts().length">
+      {{model.getProduct(1)?.name || 'None'}}
+    </td>
+  </tr>
+</table>
+
+<h2>getElementClass()</h2>
+
+<div [ngClass]="getElementClass(1)">
+  The first product is {{model.getProduct(1).name}}
+</div>
+
+<div class="p-a-1"
+     [class.bg-success]="model.getProduct(2).price < 50"
+     [class.bg-info]="model.getProduct(2).price >= 50" >
+    The second product is {{model.getProduct(2).name}}
+</div>
+
+<h2>getClassMap()</h2>
+
+<div class="p-a-1"
+     [ngClass]="getClassMap(1)">
+  The first product is {{model.getProduct(1).name}}
+</div>
+
+<div class="p-a-1"
+     [ngClass]="getClassMap(2)">
+  The second product is {{model.getProduct(2).name}}
+</div>
+
+<div class="p-a-1"
+     [class.bg-success]="model.getProduct(3).price < 50"
+     [class.bg-info]="model.getProduct(3).price >= 50" >
+    The third product is {{model.getProduct(3).name}}
+</div>
+
+<h2>style Bindings</h2>
+
+<div class="p-a-1"
+     [ngClass]="getClassMap(1)">
+  The <span [style.fontSize]="fontSizeWithUnits">first</span> product is {{model.getProduct(1).name}}
+</div>
+
+<div class="p-a-1"
+     [ngClass]="getClassMap(2)">
+  The <span [style.fontSize.px]="fontSizeWithoutUnits">second</span> product is {{model.getProduct(2).name}}
+</div>
+
+<h2>getStyles()</h2>
+
+<div class="p-a-1 bg-warning">
+  The <span [ngStyle]="getStyles(1)">first</span> product is {{model.getProduct(1).name}}
+</div>
+
+<div class="p-a-1 bg-info">
+  The <span [ngStyle]="getStyles(2)">second</span> product is {{model.getProduct(2).name}}
+</div>
