@@ -1,0 +1,98 @@
+<h2 class="m-a-1">Firts part</h2>
+
+<div class="bg-info p-a-1 m-a-2">
+  There are {{ getProductCount() }} products.
+</div>
+
+<div *ngIf="getProductCount() > 4" class="bg-info p-a-1 m-a-2">
+  There are more than 4 products in the model
+</div>
+
+<h2 class="m-a-1">Using ng-template</h2>
+
+<ng-template ngIf="getProductCount() > 4">
+  <div class="bg-info p-a-1 m-a-2">
+    There are more than 4 products in the model
+  </div>
+</ng-template>
+
+<div *ngIf="getProductByPosition(0).name != 'Kayak'" class="bg-info p-a-1 m-t-1">
+  The first product isn't a Kayak
+</div>
+
+<h2 class="m-a-1">Using ngSwitch</h2>
+
+<div [ngSwitch]="getProductCount()" class="bg-info p-a-1 m-a-2">
+  <span *ngSwitchCase="2">
+    There are two products
+  </span>
+  <span *ngSwitchCase="5">
+    There are five products
+  </span>
+  <span *ngSwitchDefault>
+    This is the default
+  </span>
+</div>
+
+<h2 class="m-a-1">Using ngFor</h2>
+
+<table class="table table-sm table-bordered m-a-2">
+  <tr>
+    <th>index</th>
+    <th>name</th>
+    <th>cateory</th>
+    <th>price</th>
+  </tr>
+  <tr *ngFor="let item of getProducts(); let i = index; let odd = odd;"
+      [class.bg-primary]="odd"
+      [class.bg-info]="!odd">
+    <td>{{ i + 1 }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.category }}</td>
+    <td>{{ item.price }}</td>
+  </tr>
+</table>
+
+<h3 class="m-a-2">Using ngFor (ng-template)</h3>
+
+<table class="table table-sm table-bordered m-a-2">
+    <tr>
+      <th>index</th>
+      <th>name</th>
+      <th>cateory</th>
+      <th>price</th>
+    </tr>
+    <ng-template ngFor
+                let-item
+                [ngForOf]="getProducts()"
+                let-i="index"
+                let-odd="odd" >
+      <tr [class.bg-primary]="odd"
+          [class.bg-info]="!odd">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.price }}</td>
+      </tr>
+    </ng-template>
+  </table>
+
+<h2 class="m-a-1">Using ngFor firts and last value</h2>
+
+<table class="table table-sm table-bordered m-a-2">
+    <tr>
+      <th>index</th>
+      <th>name</th>
+      <th>cateory</th>
+      <th>price</th>
+    </tr>
+    <tr *ngFor="let item of getProducts(); let i = index; let odd = odd; let first = first; let last = last; trackBy:getKey"
+        [class.bg-primary]="odd"
+        [class.bg-info]="!odd"
+        [class.bg-warning]="first || last">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.category }}</td>
+      <td *ngIf="!last">{{ item.price }}</td>
+    </tr>
+  </table>
