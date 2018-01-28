@@ -11,6 +11,7 @@ import { SimpleDataSource } from "./datasource.model";
 export class AppComponent {
   model: Model = new Model();
   targetName: string = "Kayak";
+  counter: number = 1;
   private dataSource: SimpleDataSource;
   private products: Product[];
 
@@ -36,10 +37,19 @@ export class AppComponent {
   }
 
   getProductCount(): number {
+    console.log("getProductCount invoked");
     return this.getProducts().length;
   }
 
   getKey(index: number, product: Product) {
     return product.id;
+  }
+
+  get nextProduct(): Product {
+    return this.model.getProducts().shift();
+  }
+
+  getProductPrice(index: number): number {
+    return Math.floor(this.getProduct(index).price);
   }
 }

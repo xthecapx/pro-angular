@@ -56,43 +56,100 @@
 <h3 class="m-a-2">Using ngFor (ng-template)</h3>
 
 <table class="table table-sm table-bordered m-a-2">
-    <tr>
-      <th>index</th>
-      <th>name</th>
-      <th>cateory</th>
-      <th>price</th>
+  <tr>
+    <th>index</th>
+    <th>name</th>
+    <th>cateory</th>
+    <th>price</th>
+  </tr>
+  <ng-template ngFor
+              let-item
+              [ngForOf]="getProducts()"
+              let-i="index"
+              let-odd="odd" >
+    <tr [class.bg-primary]="odd"
+        [class.bg-info]="!odd">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.category }}</td>
+      <td>{{ item.price }}</td>
     </tr>
-    <ng-template ngFor
-                let-item
-                [ngForOf]="getProducts()"
-                let-i="index"
-                let-odd="odd" >
-      <tr [class.bg-primary]="odd"
-          [class.bg-info]="!odd">
-        <td>{{ i + 1 }}</td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.category }}</td>
-        <td>{{ item.price }}</td>
-      </tr>
-    </ng-template>
-  </table>
+  </ng-template>
+</table>
 
 <h2 class="m-a-1">Using ngFor firts and last value</h2>
 
 <table class="table table-sm table-bordered m-a-2">
-    <tr>
-      <th>index</th>
-      <th>name</th>
-      <th>cateory</th>
-      <th>price</th>
-    </tr>
-    <tr *ngFor="let item of getProducts(); let i = index; let odd = odd; let first = first; let last = last; trackBy:getKey"
-        [class.bg-primary]="odd"
-        [class.bg-info]="!odd"
-        [class.bg-warning]="first || last">
-      <td>{{ i + 1 }}</td>
-      <td>{{ item.name }}</td>
-      <td>{{ item.category }}</td>
-      <td *ngIf="!last">{{ item.price }}</td>
-    </tr>
-  </table>
+  <tr>
+    <th>index</th>
+    <th>name</th>
+    <th>cateory</th>
+    <th>price</th>
+  </tr>
+  <tr *ngFor="let item of getProducts(); let i = index; let odd = odd; let first = first; let last = last; trackBy:getKey"
+      [class.bg-primary]="odd"
+      [class.bg-info]="!odd"
+      [class.bg-warning]="first || last">
+    <td>{{ i + 1 }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.category }}</td>
+    <td *ngIf="!last">{{ item.price }}</td>
+  </tr>
+</table>
+
+<h2 class="m-a-1">Using ngTemplateOutlet</h2>
+
+<ng-template #titleTemplate>
+  <h4 class="p-a-1 bg-success">Repeated content</h4>
+</ng-template>
+
+<ng-template [ngTemplateOutlet]="titleTemplate"></ng-template>
+
+<div class="bg-info p-a-1 m-a-2">
+  There are {{ getProductCount() }} products.
+</div>
+
+<ng-template [ngTemplateOutlet]="titleTemplate"></ng-template>
+
+<h2 class="m-a-1">providing Context Data</h2>
+
+<ng-template #titleTemplateContext let-text="title">
+  <h4 class="p-a-1 bg-success">Repeated {{text}}</h4>
+</ng-template>
+
+<ng-template [ngTemplateOutlet]="titleTemplateContext"
+            [ngTemplateOutletContext]="{title: 'Header'}"></ng-template>
+
+<div class="bg-info p-a-1 m-a-2">
+  There are {{ getProductCount() }} products.
+</div>
+
+<p>without ngTemplate</p>
+<div *ngTemplateOutlet="titleTemplateContext; context: {title: 'Footer'}"></div>
+
+<!--
+Error: Bindings cannot contain assignments ...
+<div class="bg-info p-a-1">
+  Counter: {{ counter = counter + 1 }}
+</div>
+-->
+
+<!--
+Expression has changed after it was checked
+<div class="bg-info p-a-1">
+  Next product is {{ nextProduct?.name }}
+</div>
+-->
+
+<!--
+Cannot read property 'floor' of undefined
+<div class="bg-info p-a-1">
+  The round price is {{ Math.floor(getProduct(1).price) }}
+</div>
+-->
+
+<h2 class="m-a-1">Global namespace</h2>
+
+<div class="bg-info p-a-1">
+  The round price is {{ getProductPrice(1) }}
+</div>
