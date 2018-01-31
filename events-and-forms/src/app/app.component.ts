@@ -10,10 +10,12 @@ import { SimpleDataSource } from "./datasource.model";
 })
 export class AppComponent {
   model: Model = new Model();
-  targetName: string = "Kayak";
-  counter: number = 1;
+  targetName = "Kayak";
+  counter = 1;
   private dataSource: SimpleDataSource;
   private products: Product[];
+  selectedProduct: string;
+  newProduct: Product = new Product();
 
   constructor(ref: ApplicationRef) {
     (<any>window).appRef = ref;
@@ -50,5 +52,17 @@ export class AppComponent {
 
   getProductPrice(index: number): number {
     return Math.floor(this.getProduct(index).price);
+  }
+
+  getSelected(product: Product): boolean {
+    return product.name === this.selectedProduct;
+  }
+
+  get jsonProduct() {
+    return JSON.stringify(this.newProduct);
+  }
+
+  addProduct(p: Product) {
+    console.log("New Product: " + this.jsonProduct);
   }
 }
