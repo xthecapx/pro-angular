@@ -1,21 +1,23 @@
-import { Component, ApplicationRef } from "@angular/core";
-import { Model } from "./repository.model";
-import { Product } from "./product.model";
-import { SimpleDataSource } from "./datasource.model";
+import { Component, ApplicationRef, state } from '@angular/core';
+import { Model } from './repository.model';
+import { Product } from './product.model';
+import { SimpleDataSource } from './datasource.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   model: Model = new Model();
-  targetName = "Kayak";
+  targetName = 'Kayak';
   counter = 1;
   private dataSource: SimpleDataSource;
   private products: Product[];
   selectedProduct: string;
   newProduct: Product = new Product();
+  formSubmitted = false;
 
   constructor(ref: ApplicationRef) {
     (<any>window).appRef = ref;
@@ -63,6 +65,50 @@ export class AppComponent {
   }
 
   addProduct(p: Product) {
-    console.log("New Product: " + this.jsonProduct);
+    console.log('New Product: ' + this.jsonProduct);
+  }
+
+  getValidationMessages(state: any, thingName?: string) {
+    const thing: string = state.path || thingName;
+    const messages: string[] = [];
+
+    if (state.errors) {
+      for (const errorName in state.errors) {
+        if (state.errors.hasOwnProperty(errorName)) {
+          switch (errorName) {
+            case 'required':
+              messages.push(`You must enter a ${thing}`);
+              break;
+            case 'minlength':
+              messages.push(`A ${thing} must be at least ${state.errors['minlength'].requiredLength} characters`);
+              break;
+            /*            case 'maxlength':
+              messages.push(`A ${this.label} must be no more than
+                        ${state.errors['maxlength'].requiredLength}
+                        characters`);
+              break;
+            case 'limit':
+              messages.push(`A ${this.label} cannot be more
+                            than ${this.errors['limit'].limit}`);
+              break;*/
+            case 'pattern':
+              messages.push(`The ${thing} contains illegal characters`);
+              break;
+          }
+        }
+      }
+    }
+    return messages;
+  }
+
+  submitForm(form: NgForm) {
+    this.formSubmitted = true;
+
+    if (form.valid) {
+      this.addProduct(this.newProduct);
+      this.newProduct = new Product();
+      form.reset();
+      this.formSubmitted = false;
+    }
   }
 }

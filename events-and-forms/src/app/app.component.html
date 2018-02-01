@@ -82,7 +82,8 @@
 </div>
 <button class="btn btn-primary" (click)="addProduct(newProduct)" >Create</button> -->
 
-<form novalidate (ngSubmit)="addProduct(newProduct)">
+<!-- <form novalidate (ngSubmit)="addProduct(newProduct)"> -->
+<form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
   <div class="form-group">
     <label for="">Name</label>
     <input
@@ -93,7 +94,7 @@
       required="true"
       minlength="5"
       pattern="^[A-Za-z ]+$" />
-    <ul class="text-danger list-unstyled"
+    <!--<ul class="text-danger list-unstyled"
         *ngIf="name.touched && name.invalid">
       <li *ngIf="name.errors['required']">
         You must enter a product name
@@ -104,6 +105,14 @@
       <li *ngIf="name.errors['minlength']">
         Product names must be at least {{ name.errors['minlength']?.requiredLength }} characters
       </li>
+    </ul>-->
+    <ul class="text-danger list-unstyled" *ngIf="name.dirty && name.invalid">
+      <li *ngFor="let error of getValidationMessages(name)">
+        {{ error }}
+      </li>
     </ul>
   </div>
+  <button class="btn btn-primary" type="submit">
+    Create
+  </button>
 </form>
