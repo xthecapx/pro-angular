@@ -1,5 +1,10 @@
 <div class="bg-info p-a-1 m-b-1" *ngIf="formSubmitted && form.invalid">
   There are a problem with the form
+  <ul>
+    <li *ngFor="let error of getFormValidationMessages(form)">
+      {{ error }}
+    </li>
+  </ul>
 </div>
 
 <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">

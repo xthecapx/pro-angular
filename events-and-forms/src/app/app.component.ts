@@ -82,15 +82,6 @@ export class AppComponent {
             case 'minlength':
               messages.push(`A ${thing} must be at least ${state.errors['minlength'].requiredLength} characters`);
               break;
-            /*            case 'maxlength':
-              messages.push(`A ${this.label} must be no more than
-                        ${state.errors['maxlength'].requiredLength}
-                        characters`);
-              break;
-            case 'limit':
-              messages.push(`A ${this.label} cannot be more
-                            than ${this.errors['limit'].limit}`);
-              break;*/
             case 'pattern':
               messages.push(`The ${thing} contains illegal characters`);
               break;
@@ -98,6 +89,16 @@ export class AppComponent {
         }
       }
     }
+    return messages;
+  }
+
+  getFormValidationMessages(form: NgForm) {
+    const messages: string[] = [];
+
+    Object.keys(form.controls).forEach(k => {
+      this.getValidationMessages(form.controls[k], k).forEach(m => messages.push(m));
+    });
+
     return messages;
   }
 
