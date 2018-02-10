@@ -1,39 +1,62 @@
-<div class="bg-info p-a-1 m-b-1" *ngIf="formSubmitted && form.invalid">
-  There are a problem with the form
-  <ul>
-    <li *ngFor="let error of getFormValidationMessages(form)">
-      {{ error }}
-    </li>
-  </ul>
-</div>
-
-<form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
+<form novalidate [formGroup]="form" (ngSubmit)="submitForm(form)">
+  <div class="bg-info p-a-1 m-b-1" *ngIf="formSubmitted && form.invalid">
+      There are a problem with the form
+      <ul>
+        <li *ngFor="let error of form.getFormValidationMessages(form)">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
   <div class="form-group">
     <label for="">Name</label>
     <input
       name="name"
       class="form-control"
-      #name="ngModel"
       [(ngModel)]="newProduct.name"
-      required="true"
-      minlength="5"
-      pattern="^[A-Za-z ]+$" />
-    <ul class="text-danger list-unstyled" *ngIf="(formSubmitted || name.dirty) && name.invalid">
-      <li *ngFor="let error of getValidationMessages(name)">
+      formControlName="name" />
+    <ul
+      class="text-danger list-unstyled"
+      *ngIf="(formSubmitted || form.controls['name'].dirty) && form.controls['name'].invalid">
+      <li *ngFor="let error of form.controls['name'].getValidationMessage(name)">
+        {{ error }}
+      </li>
+    </ul>
+  </div>
+  <div class="form-group">
+    <label for="">Category</label>
+    <input
+      class="form-control"
+      name="category"
+      [(ngModel)]="newProduct.category"
+      formControlName="category" />
+    <ul
+      class="text-danger list-unstyled"
+      *ngIf="(formSubmitted || form.controls['category'].touched) && form.controls['category'].invalid">
+      <li *ngFor="let error of form.controls['category'].getValidationMessages(price)">
         {{ error }}
       </li>
     </ul>
   </div>
   <div class="form-group">
     <label for="">Price</label>
-    <input class="form-control" name="price" [(ngModel)]="newProduct.price" #price="ngModel" required pattern="^[0-9\.]+$" />
-    <ul class="text-danger list-unstyled" *ngIf="(formSubmitted || price.touched) && price.invalid">
-      <li *ngFor="let error of getValidationMessages(price)">
+    <input
+      class="form-control"
+      name="price"
+      [(ngModel)]="newProduct.price"
+      formControlName="price" />
+    <ul
+      class="text-danger list-unstyled"
+      *ngIf="(formSubmitted || form.controls['price'].touched) && form.controls['price'].invalid">
+      <li *ngFor="let error of form.controls['price'].getValidationMessages(price)">
         {{ error }}
       </li>
     </ul>
   </div>
-  <button class="btn btn-primary" type="submit" [disabled]="formSubmitted && form.invalid" [class.btn-secondary]="formSubmitted && form.invalid">
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="formSubmitted && form.invalid"
+    [class.btn-secondary]="formSubmitted && form.invalid">
     Create
   </button>
 </form>

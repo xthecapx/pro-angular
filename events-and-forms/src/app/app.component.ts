@@ -3,6 +3,7 @@ import { Model } from './repository.model';
 import { Product } from './product.model';
 import { SimpleDataSource } from './datasource.model';
 import { NgForm } from '@angular/forms';
+import { ProductFormGroup } from './form.model';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   selectedProduct: string;
   newProduct: Product = new Product();
   formSubmitted = false;
+  form: ProductFormGroup;
 
   constructor(ref: ApplicationRef) {
     (<any>window).appRef = ref;
@@ -26,6 +28,7 @@ export class AppComponent {
     this.dataSource = new SimpleDataSource();
     this.products = new Array<Product>();
     this.dataSource.getData().forEach(p => this.products.push(p));
+    this.form = new ProductFormGroup();
   }
 
   getProductByPosition(position: number): Product {
@@ -66,40 +69,6 @@ export class AppComponent {
 
   addProduct(p: Product) {
     console.log('New Product: ' + this.jsonProduct);
-  }
-
-  getValidationMessages(state: any, thingName?: string) {
-    const thing: string = state.path || thingName;
-    const messages: string[] = [];
-
-    if (state.errors) {
-      for (const errorName in state.errors) {
-        if (state.errors.hasOwnProperty(errorName)) {
-          switch (errorName) {
-            case 'required':
-              messages.push(`You must enter a ${thing}`);
-              break;
-            case 'minlength':
-              messages.push(`A ${thing} must be at least ${state.errors['minlength'].requiredLength} characters`);
-              break;
-            case 'pattern':
-              messages.push(`The ${thing} contains illegal characters`);
-              break;
-          }
-        }
-      }
-    }
-    return messages;
-  }
-
-  getFormValidationMessages(form: NgForm) {
-    const messages: string[] = [];
-
-    Object.keys(form.controls).forEach(k => {
-      this.getValidationMessages(form.controls[k], k).forEach(m => messages.push(m));
-    });
-
-    return messages;
   }
 
   submitForm(form: NgForm) {
