@@ -39,7 +39,7 @@
       <th>Category</th>
       <th>Price</th>
     </tr>
-    <tr *ngFor="let item of getProducts(); let i = index;">
+    <tr *ngFor="let item of getProducts(); let i = index;" pa-attr>
       <td>{{i + 1}}</td>
       <td>{{item.name}}</td>
       <td>{{item.category}}</td>
