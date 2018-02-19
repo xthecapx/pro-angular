@@ -39,11 +39,11 @@
       <th>Category</th>
       <th>Price</th>
     </tr>
-    <tr *ngFor="let item of getProducts(); let i = index;" pa-attr>
+    <tr *ngFor="let item of getProducts(); let i = index;" [pa-attr]="getProducts().length < 6 ? 'bg-success' : 'bg-warning'">
       <td>{{i + 1}}</td>
       <td>{{item.name}}</td>
-      <td pa-attr pa-attr-class="bg-warning">{{item.category}}</td>
-      <td pa-attr pa-attr-class="bg-info">{{item.price}}</td>
+      <td [pa-attr]="item.category == 'Soccer' ? 'bg-info' : 'bg-warning'">{{item.category}}</td>
+      <td [pa-attr]="bg-info">{{item.price}}</td>
     </tr>
   </table>
 </div>
