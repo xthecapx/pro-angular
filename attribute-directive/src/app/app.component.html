@@ -1,0 +1,49 @@
+<div class="col-xs-6">
+  <form novalidate [formGroup]="form" (ngSubmit)="submitForm(form)">
+    <div class="bg-info p-a-1 m-b-1" *ngIf="formSubmitted && form.invalid">
+        There are a problem with the form
+        <ul>
+          <li *ngFor="let error of form.getFormValidationMessages(form)">
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+    <div class="form-group" *ngFor="let control of form.productControls">
+      <label for="">{{control.label}}</label>
+      <input
+        class="form-control"
+        [name]="control.modelProperty"
+        [(ngModel)]="newProduct[control.modelProperty]"
+        [formControlName]="control.modelProperty" />
+      <ul
+        class="text-danger list-unstyled"
+        *ngIf="(formSubmitted || control.touched) && control.invalid">
+        <li *ngFor="let error of control.getValidationMessages()">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="formSubmitted && form.invalid"
+      [class.btn-secondary]="formSubmitted && form.invalid">
+      Create
+    </button>
+  </form>
+</div>
+<div class="col-xs-6">
+  <table class="table-table-sm table-bordered table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+    </tr>
+    <tr *ngFor="let item of getProducts(); let i = index;">
+      <td>{{i + 1}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.category}}</td>
+      <td>{{item.price}}</td>
+    </tr>
+  </table>
+</div>
